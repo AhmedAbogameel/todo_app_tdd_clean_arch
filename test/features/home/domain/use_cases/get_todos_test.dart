@@ -39,11 +39,11 @@ main() {
     'should get Failure when data is not available',
     () async {
       // arrange
-      when(mockHomeRepository.getTodos()).thenAnswer((_) async => Left(NoTodosFailure()));
+      when(mockHomeRepository.getTodos()).thenAnswer((_) async => Left(CacheFailure()));
       // act
       final result = await mockHomeRepository.getTodos();
       // assert
-      expect(result, Left(NoTodosFailure()));
+      expect(result, Left(CacheFailure()));
     },
   );
 

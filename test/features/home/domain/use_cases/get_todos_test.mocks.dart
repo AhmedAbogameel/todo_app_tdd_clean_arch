@@ -37,10 +37,4 @@ class MockHomeRepository extends _i1.Mock implements _i3.HomeRepository {
           returnValue: Future<_i2.Either<_i5.Failure, List<_i6.Todo>>>.value(
               _FakeEither_0<_i5.Failure, List<_i6.Todo>>())) as _i4
           .Future<_i2.Either<_i5.Failure, List<_i6.Todo>>>);
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, void>> uploadUnSendTodos() =>
-      (super.noSuchMethod(Invocation.method(#uploadUnSendTodos, []),
-              returnValue: Future<_i2.Either<_i5.Failure, void>>.value(
-                  _FakeEither_0<_i5.Failure, void>()))
-          as _i4.Future<_i2.Either<_i5.Failure, void>>);
 }
