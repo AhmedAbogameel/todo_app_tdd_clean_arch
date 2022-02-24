@@ -21,14 +21,18 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<Either<Failure, List<Todo>>> getTodos() async {
     if (await networkManager.isConnected) {
-      try {
-        final result = await homeRemoteDataSource.getTodos();
-        await homeLocalDataSource.cacheTodos(result);
-        return Right(result);
-      } on ServerException {
-        return _getTodosFromLocalDS();
-      }
+      return _getTodosFromRemoteDS();
     } else {
+      return _getTodosFromLocalDS();
+    }
+  }
+
+  Future<Either<Failure, List<Todo>>> _getTodosFromRemoteDS() async {
+    try {
+      final result = await homeRemoteDataSource.getTodos();
+      await homeLocalDataSource.cacheTodos(result);
+      return Right(result);
+    } on ServerException {
       return _getTodosFromLocalDS();
     }
   }
