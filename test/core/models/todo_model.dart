@@ -11,6 +11,7 @@ main() {
   test(
     'should be subclass of Todo',
     () async {
+      // assert
       expect(tTodoModel, isA<Todo>());
     },
   );
