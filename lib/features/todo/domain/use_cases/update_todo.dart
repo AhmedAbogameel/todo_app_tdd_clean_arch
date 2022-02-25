@@ -9,6 +9,6 @@ class UpdateTodo {
 
   UpdateTodo({required this.repository});
 
-  Future<Either<Failure, Todo>> call(Todo todo) => repository.createTodo(todo);
+  Future<Either<Failure, Todo>> call(Todo todo) => repository.updateTodo(todo);
 
 }

@@ -40,20 +40,20 @@ class MockTodoRepository extends _i1.Mock implements _i3.TodoRepository {
           .Future<_i2.Either<_i5.Failure, List<_i6.Todo>>>);
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.Todo>> createTodo(_i6.Todo? todo) =>
-      (super.noSuchMethod(Invocation.method(#createTodos, [todo]),
+      (super.noSuchMethod(Invocation.method(#createTodo, [todo]),
               returnValue: Future<_i2.Either<_i5.Failure, _i6.Todo>>.value(
                   _FakeEither_0<_i5.Failure, _i6.Todo>()))
           as _i4.Future<_i2.Either<_i5.Failure, _i6.Todo>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, void>> updateTodos() =>
-      (super.noSuchMethod(Invocation.method(#updateTodos, []),
-              returnValue: Future<_i2.Either<_i5.Failure, void>>.value(
-                  _FakeEither_0<_i5.Failure, void>()))
-          as _i4.Future<_i2.Either<_i5.Failure, void>>);
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Todo>> updateTodo(_i6.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#updateTodo, [todo]),
+              returnValue: Future<_i2.Either<_i5.Failure, _i6.Todo>>.value(
+                  _FakeEither_0<_i5.Failure, _i6.Todo>()))
+          as _i4.Future<_i2.Either<_i5.Failure, _i6.Todo>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, void>> deleteTodos() =>
-      (super.noSuchMethod(Invocation.method(#deleteTodos, []),
-              returnValue: Future<_i2.Either<_i5.Failure, void>>.value(
-                  _FakeEither_0<_i5.Failure, void>()))
-          as _i4.Future<_i2.Either<_i5.Failure, void>>);
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Todo>> deleteTodo(_i6.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#deleteTodo, [todo]),
+              returnValue: Future<_i2.Either<_i5.Failure, _i6.Todo>>.value(
+                  _FakeEither_0<_i5.Failure, _i6.Todo>()))
+          as _i4.Future<_i2.Either<_i5.Failure, _i6.Todo>>);
 }
