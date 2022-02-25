@@ -48,10 +48,15 @@ class MockTodoRemoteDataSource extends _i1.Mock
               returnValue: Future<_i2.Todo>.value(_FakeTodo_0()))
           as _i4.Future<_i2.Todo>);
   @override
-  _i4.Future<void> uploadUnsentTodos(List<_i5.TodoModel>? todos) =>
-      (super.noSuchMethod(Invocation.method(#uploadUnsentTodos, [todos]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  _i4.Future<_i2.Todo> deleteTodo(_i2.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#deleteTodo, [todo]),
+              returnValue: Future<_i2.Todo>.value(_FakeTodo_0()))
+          as _i4.Future<_i2.Todo>);
+  @override
+  _i4.Future<_i2.Todo> updateTodo(_i2.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#updateTodo, [todo]),
+              returnValue: Future<_i2.Todo>.value(_FakeTodo_0()))
+          as _i4.Future<_i2.Todo>);
 }
 
 /// A class which mocks [TodoLocalDataSource].

@@ -57,15 +57,31 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<Either<Failure, Todo>> deleteTodo(Todo todo) {
-    // TODO: implement deleteTodos
-    throw UnimplementedError();
+  Future<Either<Failure, Todo>> deleteTodo(Todo todo) async {
+    if (await networkManager.isConnected) {
+      try {
+        final result = await todoRemoteDataSource.deleteTodo(todo);
+        return Right(result);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(NoConnectionFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, Todo>> updateTodo(Todo todo) {
-    // TODO: implement updateTodos
-    throw UnimplementedError();
+  Future<Either<Failure, Todo>> updateTodo(Todo todo) async {
+    if (await networkManager.isConnected) {
+      try {
+        final result = await todoRemoteDataSource.updateTodo(todo);
+        return Right(result);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(NoConnectionFailure());
+    }
   }
 
 }

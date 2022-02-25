@@ -126,6 +126,57 @@ main() {
       },
     );
 
+    test(
+      'should update Todo when device is online',
+          () async {
+        // arrange
+        when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
+        when(mockTodoRemoteDataSource.updateTodo(tTodo)).thenAnswer((_) async => tTodo);
+        // act
+        final result = await todoRepositoryImpl.updateTodo(tTodo);
+        // assert
+        expect(result, Right(tTodo));
+      },
+    );
+
+    test(
+      'should throws ServerFailure when update Failed',
+          () async {
+        // arrange
+        when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
+        when(mockTodoRemoteDataSource.updateTodo(tTodo)).thenThrow(ServerException());
+        // act
+        final result = await todoRepositoryImpl.updateTodo(tTodo);
+        // assert
+        expect(result, Left(ServerFailure()));
+      },
+    );
+
+    test(
+      'should delete Todo when device is online',
+          () async {
+        // arrange
+        when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
+        when(mockTodoRemoteDataSource.deleteTodo(tTodo)).thenAnswer((_) async => tTodo);
+        // act
+        final result = await todoRepositoryImpl.deleteTodo(tTodo);
+        // assert
+        expect(result, Right(tTodo));
+      },
+    );
+
+    test(
+      'should throws ServerFailure when Deletion Failed',
+          () async {
+        // arrange
+        when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
+        when(mockTodoRemoteDataSource.deleteTodo(tTodo)).thenThrow(ServerException());
+        // act
+        final result = await todoRepositoryImpl.deleteTodo(tTodo);
+        // assert
+        expect(result, Left(ServerFailure()));
+      },
+    );
 
   });
 
