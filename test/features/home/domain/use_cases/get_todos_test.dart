@@ -9,7 +9,6 @@ import 'package:todo_app_tdd_clean_arch/features/todo/domain/use_cases/get_todos
 
 import 'get_todos_test.mocks.dart';
 
-
 @GenerateMocks([TodoRepository])
 main() {
   late MockTodoRepository mockHomeRepository;
