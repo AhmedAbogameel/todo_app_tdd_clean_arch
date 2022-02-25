@@ -47,6 +47,7 @@ class TodoRepositoryImpl implements TodoRepository {
     if (await networkManager.isConnected) {
       try {
         final result = await todoRemoteDataSource.createTodo(todo);
+        await todoLocalDataSource.createTodo(todo);
         return Right(result);
       } on ServerException {
         return Left(ServerFailure());
@@ -61,6 +62,7 @@ class TodoRepositoryImpl implements TodoRepository {
     if (await networkManager.isConnected) {
       try {
         final result = await todoRemoteDataSource.deleteTodo(todo);
+        await todoLocalDataSource.deleteTodo(todo);
         return Right(result);
       } on ServerException {
         return Left(ServerFailure());
@@ -75,6 +77,7 @@ class TodoRepositoryImpl implements TodoRepository {
     if (await networkManager.isConnected) {
       try {
         final result = await todoRemoteDataSource.updateTodo(todo);
+        await todoLocalDataSource.updateTodo(todo);
         return Right(result);
       } on ServerException {
         return Left(ServerFailure());

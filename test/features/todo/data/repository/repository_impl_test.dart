@@ -114,6 +114,19 @@ main() {
     );
 
     test(
+      'should cache todo after creation',
+      () async {
+        // arrange
+        when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
+        when(mockTodoRemoteDataSource.createTodo(tTodo)).thenAnswer((_) async => tTodo);
+        // act
+        await todoRepositoryImpl.createTodo(tTodo);
+        // assert
+        verify(mockTodoLocalDataSource.createTodo(tTodo));
+      },
+    );
+
+    test(
       'should throws ServerFailure when Creation Failed',
       () async {
         // arrange
@@ -140,6 +153,19 @@ main() {
     );
 
     test(
+      'should update todo in local source after update',
+          () async {
+        // arrange
+        when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
+        when(mockTodoRemoteDataSource.updateTodo(tTodo)).thenAnswer((_) async => tTodo);
+        // act
+        await todoRepositoryImpl.updateTodo(tTodo);
+        // assert
+        verify(mockTodoLocalDataSource.updateTodo(tTodo));
+      },
+    );
+
+    test(
       'should throws ServerFailure when update Failed',
           () async {
         // arrange
@@ -162,6 +188,19 @@ main() {
         final result = await todoRepositoryImpl.deleteTodo(tTodo);
         // assert
         expect(result, Right(tTodo));
+      },
+    );
+
+    test(
+      'should delete todo after deletion',
+          () async {
+        // arrange
+        when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
+        when(mockTodoRemoteDataSource.deleteTodo(tTodo)).thenAnswer((_) async => tTodo);
+        // act
+        await todoRepositoryImpl.deleteTodo(tTodo);
+        // assert
+        verify(mockTodoLocalDataSource.deleteTodo(tTodo));
       },
     );
 

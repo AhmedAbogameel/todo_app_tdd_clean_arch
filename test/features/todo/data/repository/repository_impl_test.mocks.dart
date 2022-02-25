@@ -69,6 +69,21 @@ class MockTodoLocalDataSource extends _i1.Mock
   }
 
   @override
+  _i4.Future<void> updateTodo(_i2.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#updateTodo, [todo]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> createTodo(_i2.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#createTodo, [todo]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> deleteTodo(_i2.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#deleteTodo, [todo]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
   _i4.Future<List<_i5.TodoModel>> getTodos() =>
       (super.noSuchMethod(Invocation.method(#getTodos, []),
               returnValue: Future<List<_i5.TodoModel>>.value(<_i5.TodoModel>[]))
