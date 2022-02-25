@@ -2,16 +2,17 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:todo_app_tdd_clean_arch/core/entities/todo.dart';
 import 'package:todo_app_tdd_clean_arch/core/errors/failures.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/domain/repositories/repository.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/domain/use_cases/get_todos.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/domain/entities/todo.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/domain/repositories/repository.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/domain/use_cases/get_todos.dart';
 
 import 'get_todos_test.mocks.dart';
 
-@GenerateMocks([HomeRepository])
+
+@GenerateMocks([TodoRepository])
 main() {
-  late MockHomeRepository mockHomeRepository;
+  late MockTodoRepository mockHomeRepository;
   late GetTodos getTodos;
 
   final tTodos = [
@@ -19,7 +20,7 @@ main() {
   ];
 
   setUp(() {
-    mockHomeRepository = MockHomeRepository();
+    mockHomeRepository = MockTodoRepository();
     getTodos = GetTodos(repository: mockHomeRepository);
   });
 

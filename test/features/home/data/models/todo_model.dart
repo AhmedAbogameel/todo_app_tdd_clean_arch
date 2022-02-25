@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app_tdd_clean_arch/core/entities/todo.dart';
-import 'package:todo_app_tdd_clean_arch/core/models/todo_model.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/data/models/todo_model.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/domain/entities/todo.dart';
 
-import '../../fixtures/fixture_reader.dart';
+import '../../../../fixtures/fixture_reader.dart';
 
 main() {
 

@@ -1,4 +1,4 @@
-import 'package:todo_app_tdd_clean_arch/core/entities/todo.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/domain/entities/todo.dart';
 
 class TodoModel extends Todo {
   TodoModel({

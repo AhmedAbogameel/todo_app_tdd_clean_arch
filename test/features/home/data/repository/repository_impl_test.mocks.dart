@@ -5,13 +5,14 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:todo_app_tdd_clean_arch/core/models/todo_model.dart' as _i4;
 import 'package:todo_app_tdd_clean_arch/core/network_manager/network_manager.dart'
     as _i6;
-import 'package:todo_app_tdd_clean_arch/features/home/data/data_sources/local.dart'
+import 'package:todo_app_tdd_clean_arch/features/todo/data/data_sources/local.dart'
     as _i5;
-import 'package:todo_app_tdd_clean_arch/features/home/data/data_sources/remote.dart'
+import 'package:todo_app_tdd_clean_arch/features/todo/data/data_sources/remote.dart'
     as _i2;
+import 'package:todo_app_tdd_clean_arch/features/todo/data/models/todo_model.dart'
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,12 +24,12 @@ import 'package:todo_app_tdd_clean_arch/features/home/data/data_sources/remote.d
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-/// A class which mocks [HomeRemoteDataSource].
+/// A class which mocks [TodoRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeRemoteDataSource extends _i1.Mock
-    implements _i2.HomeRemoteDataSource {
-  MockHomeRemoteDataSource() {
+class MockTodoRemoteDataSource extends _i1.Mock
+    implements _i2.TodoRemoteDataSource {
+  MockTodoRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -44,12 +45,12 @@ class MockHomeRemoteDataSource extends _i1.Mock
           returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
 }
 
-/// A class which mocks [HomeLocalDataSource].
+/// A class which mocks [TodoLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeLocalDataSource extends _i1.Mock
-    implements _i5.HomeLocalDataSource {
-  MockHomeLocalDataSource() {
+class MockTodoLocalDataSource extends _i1.Mock
+    implements _i5.TodoLocalDataSource {
+  MockTodoLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 

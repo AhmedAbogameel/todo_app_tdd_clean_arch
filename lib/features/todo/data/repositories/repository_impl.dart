@@ -1,21 +1,21 @@
 import 'package:dartz/dartz.dart';
-import 'package:todo_app_tdd_clean_arch/core/entities/todo.dart';
 import 'package:todo_app_tdd_clean_arch/core/errors/exceptions.dart';
 import 'package:todo_app_tdd_clean_arch/core/errors/failures.dart';
 import 'package:todo_app_tdd_clean_arch/core/network_manager/network_manager.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/data/data_sources/local.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/data/data_sources/remote.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/domain/repositories/repository.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/data/data_sources/local.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/data/data_sources/remote.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/domain/entities/todo.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/domain/repositories/repository.dart';
 
-class HomeRepositoryImpl implements HomeRepository {
+class TodoRepositoryImpl implements TodoRepository {
   final NetworkManager networkManager;
-  final HomeRemoteDataSource homeRemoteDataSource;
-  final HomeLocalDataSource homeLocalDataSource;
+  final TodoRemoteDataSource todoRemoteDataSource;
+  final TodoLocalDataSource todoLocalDataSource;
 
-  HomeRepositoryImpl({
+  TodoRepositoryImpl({
     required this.networkManager,
-    required this.homeRemoteDataSource,
-    required this.homeLocalDataSource,
+    required this.todoRemoteDataSource,
+    required this.todoLocalDataSource,
   });
 
   @override
@@ -29,8 +29,8 @@ class HomeRepositoryImpl implements HomeRepository {
 
   Future<Either<Failure, List<Todo>>> _getTodosFromRemoteDS() async {
     try {
-      final result = await homeRemoteDataSource.getTodos();
-      await homeLocalDataSource.cacheTodos(result);
+      final result = await todoRemoteDataSource.getTodos();
+      await todoLocalDataSource.cacheTodos(result);
       return Right(result);
     } on ServerException {
       return _getTodosFromLocalDS();
@@ -38,7 +38,7 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   Future<Either<Failure, List<Todo>>> _getTodosFromLocalDS() async {
-    final result = await homeLocalDataSource.getTodos();
+    final result = await todoLocalDataSource.getTodos();
     return Right(result);
   }
 

@@ -4,19 +4,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_app_tdd_clean_arch/core/errors/exceptions.dart';
-import 'package:todo_app_tdd_clean_arch/core/models/todo_model.dart';
 import 'package:todo_app_tdd_clean_arch/core/network_manager/network_manager.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/data/data_sources/local.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/data/data_sources/remote.dart';
-import 'package:todo_app_tdd_clean_arch/features/home/data/repositories/repository_impl.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/data/data_sources/local.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/data/data_sources/remote.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/data/models/todo_model.dart';
+import 'package:todo_app_tdd_clean_arch/features/todo/data/repositories/repository_impl.dart';
 import 'repository_impl_test.mocks.dart';
 
-@GenerateMocks([HomeRemoteDataSource, HomeLocalDataSource, NetworkManager])
+@GenerateMocks([TodoRemoteDataSource, TodoLocalDataSource, NetworkManager])
 main() {
-  late MockHomeRemoteDataSource mockHomeRemoteDataSource;
+  late MockTodoRemoteDataSource mockTodoRemoteDataSource;
   late MockNetworkManager mockNetworkManager;
-  late MockHomeLocalDataSource mockHomeLocalDataSource;
-  late HomeRepositoryImpl homeRepositoryImpl;
+  late MockTodoLocalDataSource mockTodoLocalDataSource;
+  late TodoRepositoryImpl homeRepositoryImpl;
 
   final tTodos = [
     TodoModel(
@@ -27,13 +27,13 @@ main() {
   ];
 
   setUp(() {
-    mockHomeLocalDataSource = MockHomeLocalDataSource();
-    mockHomeRemoteDataSource = MockHomeRemoteDataSource();
+    mockTodoLocalDataSource = MockTodoLocalDataSource();
+    mockTodoRemoteDataSource = MockTodoRemoteDataSource();
     mockNetworkManager = MockNetworkManager();
-    homeRepositoryImpl = HomeRepositoryImpl(
+    homeRepositoryImpl = TodoRepositoryImpl(
       networkManager: mockNetworkManager,
-      homeRemoteDataSource: mockHomeRemoteDataSource,
-      homeLocalDataSource: mockHomeLocalDataSource,
+      todoRemoteDataSource: mockTodoRemoteDataSource,
+      todoLocalDataSource: mockTodoLocalDataSource,
     );
   });
 
@@ -43,7 +43,7 @@ main() {
       () async {
         // arrange
         when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
-        when(mockHomeRemoteDataSource.getTodos()).thenAnswer((_) async => tTodos);
+        when(mockTodoRemoteDataSource.getTodos()).thenAnswer((_) async => tTodos);
         // act
         homeRepositoryImpl.getTodos();
         // assert
@@ -56,7 +56,7 @@ main() {
       () async {
         // arrange
         when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
-        when(mockHomeRemoteDataSource.getTodos()).thenAnswer((_) async => tTodos);
+        when(mockTodoRemoteDataSource.getTodos()).thenAnswer((_) async => tTodos);
         // act
         final result = await homeRepositoryImpl.getTodos();
         // assert
@@ -69,12 +69,12 @@ main() {
       () async {
         // arrange
         when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
-        when(mockHomeRemoteDataSource.getTodos()).thenAnswer((_) async => tTodos);
-        when(mockHomeLocalDataSource.cacheTodos(any)).thenAnswer((_) async => Void);
+        when(mockTodoRemoteDataSource.getTodos()).thenAnswer((_) async => tTodos);
+        when(mockTodoLocalDataSource.cacheTodos(any)).thenAnswer((_) async => Void);
         // act
         await homeRepositoryImpl.getTodos();
         // assert
-        verify(mockHomeLocalDataSource.cacheTodos(tTodos));
+        verify(mockTodoLocalDataSource.cacheTodos(tTodos));
       },
     );
 
@@ -83,13 +83,13 @@ main() {
       () async {
         // arrange
         when(mockNetworkManager.isConnected).thenAnswer((_) async => true);
-        when(mockHomeRemoteDataSource.getTodos()).thenThrow(ServerException());
-        when(mockHomeLocalDataSource.getTodos()).thenAnswer((_) async => tTodos);
+        when(mockTodoRemoteDataSource.getTodos()).thenThrow(ServerException());
+        when(mockTodoLocalDataSource.getTodos()).thenAnswer((_) async => tTodos);
         // act
         final result = await homeRepositoryImpl.getTodos();
         // assert
         expect(result, Right(tTodos));
-        verify(mockHomeLocalDataSource.getTodos());
+        verify(mockTodoLocalDataSource.getTodos());
       },
     );
   });
@@ -100,12 +100,12 @@ main() {
       () async {
         // arrange
         when(mockNetworkManager.isConnected).thenAnswer((_) async => false);
-        when(mockHomeLocalDataSource.getTodos()).thenAnswer((_) async => tTodos);
+        when(mockTodoLocalDataSource.getTodos()).thenAnswer((_) async => tTodos);
         // act
         final result = await homeRepositoryImpl.getTodos();
         // assert
         expect(result, Right(tTodos));
-        verifyZeroInteractions(mockHomeRemoteDataSource);
+        verifyZeroInteractions(mockTodoRemoteDataSource);
       },
     );
   });
